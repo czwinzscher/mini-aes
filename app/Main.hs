@@ -1,13 +1,20 @@
-{-# LANGUAGE BinaryLiterals #-}
-
 module Main where
 
 import MiniAES
 
-import Numeric (showIntAtBase)
+import Data.Char (digitToInt)
+import Data.Word (Word8)
+import System.Environment (getArgs)
+import Control.Applicative ((<$>))
+
+wordFromBinString :: String -> Word8
+wordFromBinString = foldl (\acc x -> acc * 2 + fromIntegral (digitToInt x)) 0
 
 main :: IO ()
 main = do
-  let m = Block (Nibble 0b1000) (Nibble 0b0111) (Nibble 0b1111) (Nibble 0b1011)
-      k = Block (Nibble 0b1100) (Nibble 0b0011) (Nibble 0b1111) (Nibble 0b0000)
+  [messageString, keyString] <- getArgs
+  let [m1, m2, m3, m4] = Nibble . wordFromBinString <$> words messageString
+      [k1, k2, k3, k4] = Nibble . wordFromBinString <$> words keyString
+      m = Block m1 m2 m3 m4
+      k = Block k1 k2 k3 k4
   print $ encrypt m k
