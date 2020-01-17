@@ -18,7 +18,15 @@ unitTests =
     [nibbleUnitTests, blockUnitTests, keyUnitTests, encryptUnitTests]
 
 nibbleUnitTests :: TestTree
-nibbleUnitTests = testGroup "nibble unit tests" []
+nibbleUnitTests =
+  testGroup
+    "nibble unit tests"
+    [ testCase "nibble add" $ do
+        let n1 = Nibble 0b1000
+            n2 = Nibble 0b1100
+            expected = Nibble 0b0100
+        nibbleAdd n1 n2 @?= expected
+    ]
 
 blockUnitTests :: TestTree
 blockUnitTests =
@@ -128,7 +136,7 @@ encryptUnitTests :: TestTree
 encryptUnitTests =
   testGroup
     "encryption unit tests"
-    [ testCase "encrypt test 2" $ do
+    [ testCase "encrypt test 1" $ do
         let m =
               Block
                 (Nibble 0b1000)
