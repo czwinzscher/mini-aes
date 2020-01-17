@@ -2,10 +2,10 @@ module Main where
 
 import MiniAES
 
+import Control.Applicative ((<$>))
 import Data.Char (digitToInt)
 import Data.Word (Word8)
 import System.Environment (getArgs)
-import Control.Applicative ((<$>))
 
 wordFromBinString :: String -> Word8
 wordFromBinString = foldl (\acc x -> acc * 2 + fromIntegral (digitToInt x)) 0
