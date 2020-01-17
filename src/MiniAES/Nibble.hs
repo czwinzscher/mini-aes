@@ -8,7 +8,7 @@ module MiniAES.Nibble
   , nibbleMul
   ) where
 
-import Data.Bits ((.&.), shiftL, testBit, xor)
+import Data.Bits (shiftL, testBit, xor)
 import qualified Data.Map as Map
 import Data.Maybe (fromJust)
 import Data.Word (Word8)
@@ -60,8 +60,8 @@ nibbleMul (Nibble x1) (Nibble x2) =
           [(testBit x2 i, i) | i <- [0 .. 3]]
       c = 0b10011
       -- TODO
-      mod n =
+      nibbleMod n =
         if n > 15
           then n `xor` c
           else n
-   in Nibble (mod mulRes)
+   in Nibble (nibbleMod mulRes)

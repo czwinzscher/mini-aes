@@ -64,17 +64,17 @@ encrypt :: Block -> Block -> Block
 encrypt message key = encryptRec message key 0
 
 encryptRec :: Block -> Block -> Int -> Block
-encryptRec message key round
-  | round == 2 = message `blockAdd` key
-  | round > 2 = message
+encryptRec message key roundNum
+  | roundNum == 2 = message `blockAdd` key
+  | roundNum > 2 = message
   | otherwise =
     let newMessage =
-          ((if round == 0
+          ((if roundNum == 0
               then mixColumn
               else id) .
            shiftRow . blockSub . blockAdd key)
             message
-        keyNext = nextKey key (rcons (round + 1))
-     in encryptRec newMessage keyNext (round + 1)
+        keyNext = nextKey key (rcons (roundNum + 1))
+     in encryptRec newMessage keyNext (roundNum + 1)
 -- decrypt :: Block -> Block -> Block
 -- decrypt message key = message
