@@ -30,7 +30,7 @@ library:
   source-dirs: src
 
 executables:
-  mini-aes-exe:
+  mini-aes:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
