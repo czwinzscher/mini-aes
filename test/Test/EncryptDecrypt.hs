@@ -1,6 +1,6 @@
 {-# LANGUAGE BinaryLiterals #-}
 
-module Test.Encrypt
+module Test.EncryptDecrypt
   ( encryptTests
   ) where
 

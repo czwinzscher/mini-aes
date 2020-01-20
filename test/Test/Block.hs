@@ -5,12 +5,12 @@ module Test.Block
   ( blockTests
   ) where
 
+import Test.SmallCheck.Series
 import Test.Tasty
 import Test.Tasty.HUnit
-import Test.SmallCheck.Series
 
 import MiniAES
-import Test.Nibble()
+import Test.Nibble ()
 
 instance Monad m => Serial m Block where
   series = cons4 Block

@@ -5,9 +5,9 @@ module Test.Nibble
   ( nibbleTests
   ) where
 
+import Test.SmallCheck.Series
 import Test.Tasty
 import Test.Tasty.HUnit
-import Test.SmallCheck.Series
 
 import MiniAES
 

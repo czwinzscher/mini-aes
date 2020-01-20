@@ -3,7 +3,7 @@
 import Test.Tasty
 
 import Test.Block
-import Test.Encrypt
+import Test.EncryptDecrypt
 import Test.Key
 import Test.Nibble
 
