@@ -1,5 +1,3 @@
-{-# LANGUAGE BinaryLiterals #-}
-
 import Test.Tasty
 
 import Test.Block
