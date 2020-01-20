@@ -59,9 +59,12 @@ nibbleMul (Nibble x1) (Nibble x2) =
           0
           [(testBit x2 i, i) | i <- [0 .. 3]]
       c = 0b10011
-      -- TODO
       nibbleMod n =
-        if n > 15
-          then n `xor` c
-          else n
+        foldr
+          (\(b, i) r ->
+             if b
+               then r `xor` shiftL c (i - 4)
+               else r)
+          n
+          [(testBit n i, i) | i <- [4 .. 6]]
    in Nibble (nibbleMod mulRes)

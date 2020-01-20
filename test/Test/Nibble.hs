@@ -21,5 +21,9 @@ nibbleUnitTests =
             n2 = Nibble 0b1100
             expected = Nibble 0b0100
         nibbleAdd n1 n2 @?= expected
-    -- , testCase "nibble mul" $ do
+    , testCase "nibble mul" $ do
+        let n1 = Nibble 0b1011
+            n2 = Nibble 0b0111
+            expected = Nibble 0b0100
+        nibbleMul n1 n2 @?= expected
     ]
