@@ -52,3 +52,5 @@ tests:
     - mini-aes
     - tasty
     - tasty-hunit
+    - tasty-smallcheck
+    - smallcheck
