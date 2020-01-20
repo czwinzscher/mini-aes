@@ -1,18 +1,19 @@
 {-# LANGUAGE BinaryLiterals #-}
 
 module MiniAES.Key
-  ( rcons
+  ( rconsOne
+  , rconsTwo
   , nextKey
   ) where
 
 import MiniAES.Block
 import MiniAES.Nibble
 
-rcons :: Int -> Nibble
-rcons n
-  | n == 1 = Nibble 0b0001
-  | n == 2 = Nibble 0b0010
-  | otherwise = error "only valid values are 1 and 2"
+rconsOne :: Nibble
+rconsOne = Nibble 0b0001
+
+rconsTwo :: Nibble
+rconsTwo = Nibble 0b0010
 
 nextKey :: Block -> Nibble -> Block
 nextKey (Block b0 b1 b2 b3) rcon =

@@ -16,8 +16,8 @@ keyUnitTests :: TestTree
 keyUnitTests =
   testGroup
     "key unit tests"
-    [ testCase "first key constant" $ rcons 1 @?= Nibble 0b0001
-    , testCase "second key constant" $ rcons 2 @?= Nibble 0b0010
+    [ testCase "first key constant" $ rconsOne @?= Nibble 0b0001
+    , testCase "second key constant" $ rconsTwo @?= Nibble 0b0010
     , testCase "key round 1" $ do
         let k0 =
               Block
@@ -31,7 +31,7 @@ keyUnitTests =
                 (Nibble 0b0000)
                 (Nibble 0b1111)
                 (Nibble 0b1111)
-        nextKey k0 (rcons 1) @?= expected
+        nextKey k0 rconsOne @?= expected
     , testCase "key round 2" $ do
         let k1 =
               Block
@@ -45,5 +45,5 @@ keyUnitTests =
                 (Nibble 0b0110)
                 (Nibble 0b1001)
                 (Nibble 0b0110)
-        nextKey k1 (rcons 2) @?= expected
+        nextKey k1 rconsTwo @?= expected
     ]
