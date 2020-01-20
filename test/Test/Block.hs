@@ -1,32 +1,16 @@
 {-# LANGUAGE BinaryLiterals #-}
 
+module Test.Block
+  ( blockTests
+  ) where
+
 import Test.Tasty
 import Test.Tasty.HUnit
 
 import MiniAES
 
-main :: IO ()
-main = defaultMain tests
-
-tests :: TestTree
-tests = testGroup "MiniAES tests" [unitTests]
-
-unitTests :: TestTree
-unitTests =
-  testGroup
-    "unit tests"
-    [nibbleUnitTests, blockUnitTests, keyUnitTests, encryptUnitTests]
-
-nibbleUnitTests :: TestTree
-nibbleUnitTests =
-  testGroup
-    "nibble unit tests"
-    [ testCase "nibble add" $ do
-        let n1 = Nibble 0b1000
-            n2 = Nibble 0b1100
-            expected = Nibble 0b0100
-        nibbleAdd n1 n2 @?= expected
-    ]
+blockTests :: TestTree
+blockTests = testGroup "block tests" [blockUnitTests, encryptUnitTests]
 
 blockUnitTests :: TestTree
 blockUnitTests =
@@ -94,42 +78,6 @@ blockUnitTests =
                 (Nibble 0b0101)
                 (Nibble 0b1001)
         mixColumn m @?= expected
-    ]
-
-keyUnitTests :: TestTree
-keyUnitTests =
-  testGroup
-    "key unit tests"
-    [ testCase "first key constant" $ rcons 1 @?= Nibble 0b0001
-    , testCase "second key constant" $ rcons 2 @?= Nibble 0b0010
-    , testCase "key round 1" $ do
-        let k0 =
-              Block
-                (Nibble 0b1100)
-                (Nibble 0b0011)
-                (Nibble 0b1111)
-                (Nibble 0b0000)
-            expected =
-              Block
-                (Nibble 0b0011)
-                (Nibble 0b0000)
-                (Nibble 0b1111)
-                (Nibble 0b1111)
-        nextKey k0 (rcons 1) @?= expected
-    , testCase "key round 2" $ do
-        let k1 =
-              Block
-                (Nibble 0b0011)
-                (Nibble 0b0000)
-                (Nibble 0b1111)
-                (Nibble 0b1111)
-            expected =
-              Block
-                (Nibble 0b0110)
-                (Nibble 0b0110)
-                (Nibble 0b1001)
-                (Nibble 0b0110)
-        nextKey k1 (rcons 2) @?= expected
     ]
 
 encryptUnitTests :: TestTree
