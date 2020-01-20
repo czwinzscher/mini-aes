@@ -100,8 +100,8 @@ keyUnitTests :: TestTree
 keyUnitTests =
   testGroup
     "key unit tests"
-    [ testCase "first key constant" $ do rcons 1 @?= Nibble 0b0001
-    , testCase "second key constant" $ do rcons 2 @?= Nibble 0b0010
+    [ testCase "first key constant" $ rcons 1 @?= Nibble 0b0001
+    , testCase "second key constant" $ rcons 2 @?= Nibble 0b0010
     , testCase "key round 1" $ do
         let k0 =
               Block
