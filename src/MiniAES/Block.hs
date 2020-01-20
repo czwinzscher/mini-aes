@@ -66,7 +66,7 @@ encrypt message key = encryptRec message key 0
 encryptRec :: Block -> Block -> Int -> Block
 encryptRec message key roundNum
   | roundNum == 2 = message `blockAdd` key
-  | roundNum > 2 = message
+  | roundNum > 2 || roundNum < 0 = message
   | otherwise =
     let newMessage =
           ((if roundNum == 0
