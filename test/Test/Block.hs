@@ -55,7 +55,7 @@ blockUnitTests =
                 (Nibble 0b0010)
                 (Nibble 0b1110)
                 (Nibble 0b1100)
-        blockSub m @?= expected
+        blockSubst m @?= expected
     , testCase "block shift" $ do
         let m =
               Block

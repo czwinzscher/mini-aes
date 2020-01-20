@@ -12,7 +12,8 @@ encrypt message k0 =
       k2 = nextKey k1 rconsTwo
    in (blockAdd k2 .
        shiftRow .
-       blockSub . blockAdd k1 . mixColumn . shiftRow . blockSub . blockAdd k0)
+       blockSubst .
+       blockAdd k1 . mixColumn . shiftRow . blockSubst . blockAdd k0)
         message
 
 decrypt :: Block -> Block -> Block
@@ -21,6 +22,6 @@ decrypt message k0 =
       k2 = nextKey k1 rconsTwo
    in (blockAdd k0 .
        shiftRow .
-       blockSubReversed .
-       mixColumn . blockAdd k1 . shiftRow . blockSubReversed . blockAdd k2)
+       blockSubstReversed .
+       mixColumn . blockAdd k1 . shiftRow . blockSubstReversed . blockAdd k2)
         message
