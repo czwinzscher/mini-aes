@@ -6,11 +6,15 @@ module Test.Encrypt
 
 import Test.Tasty
 import Test.Tasty.HUnit
+import Test.Tasty.SmallCheck
 
 import MiniAES
+import Test.Block ()
+import Test.Nibble ()
 
 encryptTests :: TestTree
-encryptTests = testGroup "encrypt tests" [encryptUnitTests]
+encryptTests =
+  testGroup "encrypt tests" [encryptUnitTests, encryptPropertyTests]
 
 encryptUnitTests :: TestTree
 encryptUnitTests =
@@ -56,4 +60,12 @@ encryptUnitTests =
                 (Nibble 0b0011)
                 (Nibble 0b0110)
         encrypt m k @?= expected
+    ]
+
+encryptPropertyTests :: TestTree
+encryptPropertyTests =
+  testGroup
+    "encrypt property tests"
+    [ testProperty "encrypt and decrypt returns the old message" $ \message key ->
+        decrypt (encrypt message key) key == message
     ]

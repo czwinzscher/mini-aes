@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleInstances, MultiParamTypeClasses #-}
 {-# LANGUAGE BinaryLiterals #-}
 
 module Test.Block
@@ -6,8 +7,13 @@ module Test.Block
 
 import Test.Tasty
 import Test.Tasty.HUnit
+import Test.SmallCheck.Series
 
 import MiniAES
+import Test.Nibble()
+
+instance Monad m => Serial m Block where
+  series = cons4 Block
 
 blockTests :: TestTree
 blockTests = testGroup "block tests" [blockUnitTests]

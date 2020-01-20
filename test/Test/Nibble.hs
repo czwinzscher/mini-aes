@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleInstances, MultiParamTypeClasses #-}
 {-# LANGUAGE BinaryLiterals #-}
 
 module Test.Nibble
@@ -6,8 +7,12 @@ module Test.Nibble
 
 import Test.Tasty
 import Test.Tasty.HUnit
+import Test.SmallCheck.Series
 
 import MiniAES
+
+instance Monad m => Serial m Nibble where
+  series = cons1 Nibble
 
 nibbleTests :: TestTree
 nibbleTests = testGroup "nibble tests" [nibbleUnitTests]
