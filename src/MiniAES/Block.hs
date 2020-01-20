@@ -4,6 +4,7 @@ module MiniAES.Block
   ( Block(..)
   , blockAdd
   , blockSub
+  , blockSubReversed
   , shiftRow
   , mixColumn
   ) where
@@ -28,6 +29,14 @@ blockAdd (Block n11 n12 n13 n14) (Block n21 n22 n23 n24) =
 blockSub :: Block -> Block
 blockSub (Block b0 b1 b2 b3) =
   Block (nibbleSubst b0) (nibbleSubst b1) (nibbleSubst b2) (nibbleSubst b3)
+
+blockSubReversed :: Block -> Block
+blockSubReversed (Block b0 b1 b2 b3) =
+  Block
+    (nibbleSubstReversed b0)
+    (nibbleSubstReversed b1)
+    (nibbleSubstReversed b2)
+    (nibbleSubstReversed b3)
 
 shiftRow, mixColumn :: Block -> Block
 shiftRow (Block b0 b1 b2 b3) = Block b0 b3 b2 b1

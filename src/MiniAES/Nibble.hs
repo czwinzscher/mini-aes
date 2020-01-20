@@ -3,7 +3,9 @@
 module MiniAES.Nibble
   ( Nibble(..)
   , substTable
+  , substTableReversed
   , nibbleSubst
+  , nibbleSubstReversed
   , nibbleAdd
   , nibbleMul
   ) where
@@ -42,8 +44,32 @@ substTable =
     , (Nibble 0b1111, Nibble 0b0111)
     ]
 
+substTableReversed :: Map.Map Nibble Nibble
+substTableReversed =
+  Map.fromList
+    [ (Nibble 0b0000, Nibble 0b1110)
+    , (Nibble 0b0001, Nibble 0b0011)
+    , (Nibble 0b0010, Nibble 0b0100)
+    , (Nibble 0b0011, Nibble 0b1000)
+    , (Nibble 0b0100, Nibble 0b0001)
+    , (Nibble 0b0101, Nibble 0b1100)
+    , (Nibble 0b0110, Nibble 0b1010)
+    , (Nibble 0b0111, Nibble 0b1111)
+    , (Nibble 0b1000, Nibble 0b0111)
+    , (Nibble 0b1001, Nibble 0b1101)
+    , (Nibble 0b1010, Nibble 0b1001)
+    , (Nibble 0b1011, Nibble 0b0110)
+    , (Nibble 0b1100, Nibble 0b1011)
+    , (Nibble 0b1101, Nibble 0b0010)
+    , (Nibble 0b1110, Nibble 0b0000)
+    , (Nibble 0b1111, Nibble 0b0101)
+    ]
+
 nibbleSubst :: Nibble -> Nibble
 nibbleSubst n = fromJust $ Map.lookup n substTable
+
+nibbleSubstReversed :: Nibble -> Nibble
+nibbleSubstReversed n = fromJust $ Map.lookup n substTableReversed
 
 nibbleAdd :: Nibble -> Nibble -> Nibble
 nibbleAdd (Nibble x1) (Nibble x2) = Nibble (x1 `xor` x2)
