@@ -4,12 +4,8 @@ module MiniAES.Block
   ( Block(..)
   , blockAdd
   , blockSub
-  , encrypt
-  -- , decrypt
   , shiftRow
   , mixColumn
-  , rcons
-  , nextKey
   ) where
 
 import MiniAES.Nibble
@@ -45,36 +41,3 @@ mixColumn (Block c0 c1 c2 c3) =
       (d0, d1) = calcCol c0 c1
       (d2, d3) = calcCol c2 c3
    in Block d0 d1 d2 d3
-
-rcons :: Int -> Nibble
-rcons n
-  | n == 1 = Nibble 0b0001
-  | n == 2 = Nibble 0b0010
-  | otherwise = error "only valid values are 1 and 2"
-
-nextKey :: Block -> Nibble -> Block
-nextKey (Block b0 b1 b2 b3) rcon =
-  let w0 = nibbleAdd (nibbleAdd b0 (nibbleSubst b3)) rcon
-      w1 = nibbleAdd b1 w0
-      w2 = nibbleAdd b2 w1
-      w3 = nibbleAdd b3 w2
-   in Block w0 w1 w2 w3
-
-encrypt :: Block -> Block -> Block
-encrypt message key = encryptRec message key 0
-
-encryptRec :: Block -> Block -> Int -> Block
-encryptRec message key roundNum
-  | roundNum == 2 = message `blockAdd` key
-  | roundNum > 2 || roundNum < 0 = message
-  | otherwise =
-    let newMessage =
-          ((if roundNum == 0
-              then mixColumn
-              else id) .
-           shiftRow . blockSub . blockAdd key)
-            message
-        keyNext = nextKey key (rcons (roundNum + 1))
-     in encryptRec newMessage keyNext (roundNum + 1)
--- decrypt :: Block -> Block -> Block
--- decrypt message key = message
