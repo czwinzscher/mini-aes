@@ -34,10 +34,10 @@ shiftRow (Block b0 b1 b2 b3) = Block b0 b3 b2 b1
 
 mixColumn (Block c0 c1 c2 c3) =
   let calcCol cFirst cSecond =
-        ( nibbleMul (Nibble 0b0011) cFirst `nibbleAdd`
-          nibbleMul (Nibble 0b0010) cSecond
-        , nibbleMul (Nibble 0b0010) cFirst `nibbleAdd`
-          nibbleMul (Nibble 0b0011) cSecond)
+        ( (Nibble 0b0011 `nibbleMul` cFirst) `nibbleAdd`
+          (Nibble 0b0010 `nibbleMul` cSecond)
+        , (Nibble 0b0010 `nibbleMul` cFirst) `nibbleAdd`
+          (Nibble 0b0011 `nibbleMul` cSecond))
       (d0, d1) = calcCol c0 c1
       (d2, d3) = calcCol c2 c3
    in Block d0 d1 d2 d3
