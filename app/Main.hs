@@ -6,6 +6,7 @@ import Control.Applicative ((<$>))
 import Data.Char (digitToInt)
 import Data.Word (Word8)
 import System.Environment (getArgs)
+import System.Exit (exitFailure)
 
 wordFromBinString :: String -> Word8
 wordFromBinString = foldl (\acc x -> acc * 2 + fromIntegral (digitToInt x)) 0
@@ -20,4 +21,6 @@ main = do
   case command of
     "encrypt" -> print $ encrypt m k
     "decrypt" -> print $ decrypt m k
-    _ -> putStrLn "usage: mini-aes [encrypt|decrypt] [message] [key]"
+    _ -> do
+      putStrLn "usage: mini-aes [encrypt|decrypt] [message] [key]"
+      exitFailure
