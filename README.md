@@ -1,5 +1,5 @@
 # mini-aes
-Program to encrypt 16 bit messages using Mini AES.
+Program to encrypt or decrypt 16 bit messages using Mini AES.
 
 ## usage
 ```bash
