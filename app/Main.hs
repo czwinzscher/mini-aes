@@ -12,9 +12,12 @@ wordFromBinString = foldl (\acc x -> acc * 2 + fromIntegral (digitToInt x)) 0
 
 main :: IO ()
 main = do
-  [messageString, keyString] <- getArgs
+  [command, messageString, keyString] <- getArgs
   let [m1, m2, m3, m4] = Nibble . wordFromBinString <$> words messageString
       [k1, k2, k3, k4] = Nibble . wordFromBinString <$> words keyString
       m = Block m1 m2 m3 m4
       k = Block k1 k2 k3 k4
-  print $ encrypt m k
+  case command of
+    "encrypt" -> print $ encrypt m k
+    "decrypt" -> print $ decrypt m k
+    _ -> putStrLn "usage: mini-aes [encrypt|decrypt] [message] [key]"
