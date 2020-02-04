@@ -1,6 +1,11 @@
 # mini-aes
 Program to encrypt or decrypt 16 bit messages using Mini AES.
 
+## installation
+```bash
+stack install
+```
+
 ## usage
 ```bash
 mini-aes [encrypt|decrypt] [message] [key]
