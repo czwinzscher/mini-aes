@@ -2,7 +2,6 @@ module Main where
 
 import MiniAES
 
-import Control.Applicative ((<$>))
 import Data.Char (digitToInt)
 import Data.Word (Word8)
 import System.Environment (getArgs)
