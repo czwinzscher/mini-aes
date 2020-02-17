@@ -21,7 +21,7 @@ decrypt message k0 =
   let k1 = nextKey k0 rconsOne
       k2 = nextKey k1 rconsTwo
    in (blockAdd k0 .
-       shiftRow .
        blockSubstReversed .
+       shiftRow .
        mixColumn . blockAdd k1 . shiftRow . blockSubstReversed . blockAdd k2)
         message
