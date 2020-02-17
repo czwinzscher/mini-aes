@@ -1,5 +1,3 @@
-{-# LANGUAGE BinaryLiterals #-}
-
 module MiniAES
   ( module MiniAES.Nibble
   , module MiniAES.Block
