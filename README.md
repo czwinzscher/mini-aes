@@ -1,8 +1,10 @@
 # mini-aes
-Program to encrypt or decrypt 16 bit messages using Mini AES.
+Program to encrypt or decrypt 16 bit messages using [Mini AES](https://piazza.com/class_profile/get_resource/ixlc30gojpe5fs/iyv0273azwtz4).
 
 ## installation
 ```bash
+git clone https://github.com/czwinzscher/mini-aes.git
+cd mini-aes
 stack install
 ```
 
