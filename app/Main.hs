@@ -22,7 +22,7 @@ isValidBinString str =
       foldr (\w -> (&&) (T.foldr (\c -> (&&) (validChar c)) True w)) True parts
 
 wordFromBinString :: T.Text -> Word8
-wordFromBinString = T.foldl (\acc x -> acc * 2 + fromIntegral (digitToInt x)) 0
+wordFromBinString = T.foldl' (\acc x -> acc * 2 + fromIntegral (digitToInt x)) 0
 
 main :: IO ()
 main = do
