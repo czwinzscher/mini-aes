@@ -22,7 +22,7 @@ jobs:
         name: Cache ~/.stack
         with:
           path: ~/.stack
-          key: ${{ runner.os }}-stack-${{ hashFiles('stack.yml') }}
+          key: ${{ runner.os }}-stack-${{ hashFiles('stack.yaml') }}
 
       - name: Build
         run: |
