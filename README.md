@@ -1,4 +1,6 @@
 # mini-aes
+[![GitHub CI](https://github.com/czwinzscher/mini-aes/workflows/CI/badge.svg)](https://github.com/czwinzscher/mini-aes/actions)
+
 Program to encrypt or decrypt 16 bit messages using [Mini AES](https://piazza.com/class_profile/get_resource/ixlc30gojpe5fs/iyv0273azwtz4).
 
 ## installation
