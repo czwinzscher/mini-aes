@@ -1,9 +1,8 @@
-import Test.Tasty
-
 import Test.Block
 import Test.EncryptDecrypt
 import Test.Key
 import Test.Nibble
+import Test.Tasty
 
 main :: IO ()
 main = defaultMain tests

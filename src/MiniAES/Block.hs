@@ -1,18 +1,19 @@
 {-# LANGUAGE BinaryLiterals #-}
 
 module MiniAES.Block
-  ( Block(..)
-  , blockAdd
-  , blockSubst
-  , blockSubstReversed
-  , shiftRow
-  , mixColumn
-  ) where
+  ( Block (..),
+    blockAdd,
+    blockSubst,
+    blockSubstReversed,
+    shiftRow,
+    mixColumn,
+  )
+where
 
 import MiniAES.Nibble
 
-data Block =
-  Block Nibble Nibble Nibble Nibble
+data Block
+  = Block Nibble Nibble Nibble Nibble
   deriving (Eq, Ord)
 
 instance Show Block where
@@ -40,13 +41,13 @@ blockSubstReversed (Block b0 b1 b2 b3) =
 
 shiftRow, mixColumn :: Block -> Block
 shiftRow (Block b0 b1 b2 b3) = Block b0 b3 b2 b1
-
 mixColumn (Block c0 c1 c2 c3) =
   let calcCol cFirst cSecond =
-        ( (Nibble 0b0011 `nibbleMul` cFirst) `nibbleAdd`
-          (Nibble 0b0010 `nibbleMul` cSecond)
-        , (Nibble 0b0010 `nibbleMul` cFirst) `nibbleAdd`
-          (Nibble 0b0011 `nibbleMul` cSecond))
+        ( (Nibble 0b0011 `nibbleMul` cFirst)
+            `nibbleAdd` (Nibble 0b0010 `nibbleMul` cSecond),
+          (Nibble 0b0010 `nibbleMul` cFirst)
+            `nibbleAdd` (Nibble 0b0011 `nibbleMul` cSecond)
+        )
       (d0, d1) = calcCol c0 c1
       (d2, d3) = calcCol c2 c3
    in Block d0 d1 d2 d3

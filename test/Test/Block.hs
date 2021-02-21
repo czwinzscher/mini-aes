@@ -1,14 +1,14 @@
 {-# LANGUAGE BinaryLiterals #-}
 
 module Test.Block
-  ( blockTests
-  ) where
-
-import Test.Tasty
-import Test.Tasty.HUnit
+  ( blockTests,
+  )
+where
 
 import MiniAES
 import Test.Instances ()
+import Test.Tasty
+import Test.Tasty.HUnit
 
 blockTests :: TestTree
 blockTests = testGroup "block tests" [blockUnitTests]
@@ -36,8 +36,8 @@ blockUnitTests =
                 (Nibble 0b0100)
                 (Nibble 0b0000)
                 (Nibble 0b1011)
-        blockAdd m k @?= expected
-    , testCase "block substitution" $ do
+        blockAdd m k @?= expected,
+      testCase "block substitution" $ do
         let m =
               Block
                 (Nibble 0b0100)
@@ -50,8 +50,8 @@ blockUnitTests =
                 (Nibble 0b0010)
                 (Nibble 0b1110)
                 (Nibble 0b1100)
-        blockSubst m @?= expected
-    , testCase "block shift" $ do
+        blockSubst m @?= expected,
+      testCase "block shift" $ do
         let m =
               Block
                 (Nibble 0b0010)
@@ -64,8 +64,8 @@ blockUnitTests =
                 (Nibble 0b1100)
                 (Nibble 0b1110)
                 (Nibble 0b0010)
-        shiftRow m @?= expected
-    , testCase "mix columns" $ do
+        shiftRow m @?= expected,
+      testCase "mix columns" $ do
         let m =
               Block
                 (Nibble 0b0010)

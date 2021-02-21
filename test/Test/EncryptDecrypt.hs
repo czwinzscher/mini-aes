@@ -1,16 +1,16 @@
 {-# LANGUAGE BinaryLiterals #-}
 
 module Test.EncryptDecrypt
-  ( encryptTests
-  ) where
-
-import Test.Tasty
-import Test.Tasty.HUnit
-import Test.Tasty.SmallCheck
+  ( encryptTests,
+  )
+where
 
 import MiniAES
 import Test.Block ()
 import Test.Nibble ()
+import Test.Tasty
+import Test.Tasty.HUnit
+import Test.Tasty.SmallCheck
 
 encryptTests :: TestTree
 encryptTests =
@@ -39,8 +39,8 @@ encryptUnitTests =
                 (Nibble 0b1101)
                 (Nibble 0b1111)
                 (Nibble 0b0111)
-        encrypt m k @?= expected
-    , testCase "encrypt test 2" $ do
+        encrypt m k @?= expected,
+      testCase "encrypt test 2" $ do
         let m =
               Block
                 (Nibble 0b1000)

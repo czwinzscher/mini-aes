@@ -1,10 +1,11 @@
 {-# LANGUAGE BinaryLiterals #-}
 
 module MiniAES.Key
-  ( rconsOne
-  , rconsTwo
-  , nextKey
-  ) where
+  ( rconsOne,
+    rconsTwo,
+    nextKey,
+  )
+where
 
 import MiniAES.Block
 import MiniAES.Nibble
