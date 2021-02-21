@@ -8,21 +8,25 @@ copyright:           "Copyright (c) 2020 Clemens Zwinzscher"
 extra-source-files:
 - README.md
 
-# Metadata used when publishing your package
-# synopsis:            Short description of your package
-# category:            Web
-
 description:         Please see the README on GitHub at <https://github.com/czwinzscher/mini-aes#readme>
 
 dependencies:
-- base >= 4.7 && < 5
-- containers
+- base
 
 ghc-options:
   - -Wall
+  - -Wincomplete-uni-patterns
+  - -Wincomplete-record-updates
+  - -Widentities
+  - -Wredundant-constraints
+  - -Wpartial-fields
+  - -Wcompat
+  - -Wunused-packages
 
 library:
   source-dirs: src
+  dependencies:
+    - containers
 
 executables:
   mini-aes:
@@ -32,7 +36,6 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
-    - -O2
     dependencies:
     - mini-aes
     - text
